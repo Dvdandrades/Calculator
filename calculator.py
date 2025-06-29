@@ -74,6 +74,7 @@ class Calculator:
         self.create_equals_button()
         self.create_square_button()
         self.create_sqrt_button()
+        self.create_percentage_button()
         self.create_backspace_button()
 
     def create_display_labels(self):
@@ -145,6 +146,15 @@ class Calculator:
         button = tk.Button(self.buttons_frame, text="\u221ax", bg=OFF_WHITE, fg=LABEL_COLOR, font=DEFAULT_FONT_STYLE,
                            borderwidth=0, command=self.sqrt)
         button.grid(row=1, column=3, sticky=tk.NSEW)
+
+    def percentage(self):
+        self.current_expression = str(eval(f"{self.current_expression}/100"))
+        self.update_label()
+
+    def create_percentage_button(self):
+        button = tk.Button(self.buttons_frame, text="%", bg=OFF_WHITE, fg=LABEL_COLOR, font=DEFAULT_FONT_STYLE,
+                           borderwidth=0, command=self.percentage)
+        button.grid(row=0, column=1, sticky=tk.NSEW)
 
     def evaluate(self):
         self.total_expression += self.current_expression
