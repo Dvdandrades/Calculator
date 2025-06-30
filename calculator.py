@@ -70,6 +70,11 @@ class Calculator:
         for key in self.operations:
             self.window.bind(key, lambda event, operator=key: self.append_operator(operator))
 
+    def change_on_hover(self, button, hover_bg, default_bg):
+        button.bind("<Enter>", lambda event: button.config(bg=hover_bg))
+        button.bind("<Leave>", lambda event: button.config(bg=default_bg))
+
+
     def create_special_buttons(self):
         self.create_clear_button()
         self.create_equals_button()
@@ -106,6 +111,7 @@ class Calculator:
             button = tk.Button(self.buttons_frame, text=str(digit), bg=BUTTON_COLOR_DIGITS, fg=LABEL_COLOR, font=DIGITS_FONT_STYLE,
                                borderwidth=0, command=lambda x=digit: self.add_to_expression(x))
             button.grid(row=grid_value[0], column=grid_value[1], sticky=tk.NSEW)
+            self.change_on_hover(button, "#e6e6e6", BUTTON_COLOR_DIGITS)
 
     def append_operator(self, operator):
         if not self.current_expression and not self.total_expression:
@@ -127,6 +133,7 @@ class Calculator:
             button = tk.Button(self.buttons_frame, text=symbol, bg=BUTTON_COLOR_OPERATIONS, fg=LABEL_COLOR, font=DEFAULT_FONT_STYLE,
                                borderwidth=0, command=lambda x=operator: self.append_operator(x))
             button.grid(row=i, column=4, sticky=tk.NSEW)
+            self.change_on_hover(button, "#ececec", BUTTON_COLOR_OPERATIONS)
             i += 1
 
     def clear(self):
@@ -139,6 +146,7 @@ class Calculator:
         button = tk.Button(self.buttons_frame, text="C", bg=BUTTON_COLOR_OPERATIONS, fg=LABEL_COLOR, font=DEFAULT_FONT_STYLE,
                            borderwidth=0, command=self.clear)
         button.grid(row=0, column=3, sticky=tk.NSEW)
+        self.change_on_hover(button, "#e6e6e6", BUTTON_COLOR_OPERATIONS)
 
     def square(self):
         if self.current_expression:
@@ -153,6 +161,7 @@ class Calculator:
         button = tk.Button(self.buttons_frame, text="x\u00b2", bg=BUTTON_COLOR_OPERATIONS, fg=LABEL_COLOR, font=DEFAULT_FONT_STYLE,
                            borderwidth=0, command=self.square)
         button.grid(row=1, column=2, sticky=tk.NSEW)
+        self.change_on_hover(button, "#e6e6e6", BUTTON_COLOR_OPERATIONS)
 
     def sqrt(self):
         if self.current_expression:
@@ -167,6 +176,7 @@ class Calculator:
         button = tk.Button(self.buttons_frame, text="\u221ax", bg=BUTTON_COLOR_OPERATIONS, fg=LABEL_COLOR, font=DEFAULT_FONT_STYLE,
                            borderwidth=0, command=self.sqrt)
         button.grid(row=1, column=3, sticky=tk.NSEW)
+        self.change_on_hover(button, "#e6e6e6", BUTTON_COLOR_OPERATIONS)
 
     def percentage(self):
         if self.current_expression:
@@ -181,6 +191,7 @@ class Calculator:
         button = tk.Button(self.buttons_frame, text="%", bg=BUTTON_COLOR_OPERATIONS, fg=LABEL_COLOR, font=DEFAULT_FONT_STYLE,
                            borderwidth=0, command=self.percentage)
         button.grid(row=0, column=1, sticky=tk.NSEW)
+        self.change_on_hover(button, "#e6e6e6", BUTTON_COLOR_OPERATIONS)
 
     def evaluate(self):
         self.total_expression += self.current_expression
@@ -213,11 +224,13 @@ class Calculator:
         button = tk.Button(self.buttons_frame, text="=", bg=EQUAL_BUTTON_COLOR, fg=EQUAL_BUTTON_FG_COLOR, font=DEFAULT_FONT_STYLE,
                            borderwidth=0, command=self.evaluate)
         button.grid(row=5, column=4, sticky=tk.NSEW)
+        self.change_on_hover(button, "#0047AB", EQUAL_BUTTON_COLOR)
 
     def create_backspace_button(self):
         button = tk.Button(self.buttons_frame, text="⌫", bg=BUTTON_COLOR_OPERATIONS, fg=LABEL_COLOR, font=DEFAULT_FONT_STYLE,
                            borderwidth=0, command=self.delete)
         button.grid(row=0, column=4, sticky=tk.NSEW)
+        self.change_on_hover(button, "#e6e6e6", BUTTON_COLOR_OPERATIONS)
 
     def create_buttons_frame(self):
         frame = tk.Frame(self.window)
