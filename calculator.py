@@ -133,8 +133,13 @@ class Calculator:
         button.grid(row=0, column=3, sticky=tk.NSEW)
 
     def square(self):
-        self.current_expression = str(eval(f"{self.current_expression}**2"))
-        self.update_label()
+        if self.current_expression:
+            try:
+                self.current_expression = str(eval(f"{self.current_expression}**2"))
+                self.update_label()
+            except:
+                self.current_expression = "Error"
+                self.update_label()
 
     def create_square_button(self):
         button = tk.Button(self.buttons_frame, text="x\u00b2", bg=BUTTON_COLOR_OPERATIONS, fg=LABEL_COLOR, font=DEFAULT_FONT_STYLE,
@@ -142,8 +147,13 @@ class Calculator:
         button.grid(row=1, column=2, sticky=tk.NSEW)
 
     def sqrt(self):
-        self.current_expression = str(eval(f"{self.current_expression}**0.5"))
-        self.update_label()
+        if self.current_expression:
+            try:
+                self.current_expression = str(eval(f"{self.current_expression}**0.5"))
+                self.update_label()
+            except:
+                self.current_expression = "Error"
+                self.update_label()
 
     def create_sqrt_button(self):
         button = tk.Button(self.buttons_frame, text="\u221ax", bg=BUTTON_COLOR_OPERATIONS, fg=LABEL_COLOR, font=DEFAULT_FONT_STYLE,
@@ -151,8 +161,13 @@ class Calculator:
         button.grid(row=1, column=3, sticky=tk.NSEW)
 
     def percentage(self):
-        self.current_expression = str(eval(f"{self.current_expression}/100"))
-        self.update_label()
+        if self.current_expression:
+            try:
+                self.current_expression = str(eval(f"{self.current_expression}/100"))
+                self.update_label()
+            except:
+                self.current_expression = "Error"
+                self.update_label()
 
     def create_percentage_button(self):
         button = tk.Button(self.buttons_frame, text="%", bg=BUTTON_COLOR_OPERATIONS, fg=LABEL_COLOR, font=DEFAULT_FONT_STYLE,
