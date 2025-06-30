@@ -94,6 +94,9 @@ class Calculator:
         return frame
     
     def add_to_expression(self, value):
+        if value == ".":
+            if self.current_expression and "." in self.current_expression.split()[-1]:
+                return
         self.current_expression += str(value)
         self.update_label()
 
