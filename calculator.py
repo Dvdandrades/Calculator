@@ -10,9 +10,9 @@ DEFAULT_FONT_STYLE = ("Arial", 20)
 
 TOTAL_COLOR_LABEL = "#F5F5F5"
 LABEL_COLOR = "#25265E"
-BUTTON_COLOR = "#FFFFFF"
-BUTTON_COLOR_OPERATIONS = "#E5E4E2"
-OFF_WHITE = "#F8FAFF"
+
+BUTTON_COLOR_DIGITS = "#FFFFFF"
+BUTTON_COLOR_OPERATIONS = "#FAF9F6"
 EQUAL_BUTTON_COLOR = "#0F52BA"
 EQUAL_BUTTON_FG_COLOR = "#FFFFFF"
 
@@ -99,7 +99,7 @@ class Calculator:
 
     def create_digit_buttons(self):
         for digit, grid_value in self.digits.items():
-            button = tk.Button(self.buttons_frame, text=str(digit), bg=BUTTON_COLOR, fg=LABEL_COLOR, font=DIGITS_FONT_STYLE,
+            button = tk.Button(self.buttons_frame, text=str(digit), bg=BUTTON_COLOR_DIGITS, fg=LABEL_COLOR, font=DIGITS_FONT_STYLE,
                                borderwidth=0, command=lambda x=digit: self.add_to_expression(x))
             button.grid(row=grid_value[0], column=grid_value[1], sticky=tk.NSEW)
 
@@ -125,7 +125,7 @@ class Calculator:
         self.update_total_label()
 
     def create_clear_button(self):
-        button = tk.Button(self.buttons_frame, text="C", bg=OFF_WHITE, fg=LABEL_COLOR, font=DEFAULT_FONT_STYLE,
+        button = tk.Button(self.buttons_frame, text="C", bg=BUTTON_COLOR_OPERATIONS, fg=LABEL_COLOR, font=DEFAULT_FONT_STYLE,
                            borderwidth=0, command=self.clear)
         button.grid(row=0, column=3, sticky=tk.NSEW)
 
@@ -134,7 +134,7 @@ class Calculator:
         self.update_label()
 
     def create_square_button(self):
-        button = tk.Button(self.buttons_frame, text="x\u00b2", bg=OFF_WHITE, fg=LABEL_COLOR, font=DEFAULT_FONT_STYLE,
+        button = tk.Button(self.buttons_frame, text="x\u00b2", bg=BUTTON_COLOR_OPERATIONS, fg=LABEL_COLOR, font=DEFAULT_FONT_STYLE,
                            borderwidth=0, command=self.square)
         button.grid(row=1, column=2, sticky=tk.NSEW)
 
@@ -143,7 +143,7 @@ class Calculator:
         self.update_label()
 
     def create_sqrt_button(self):
-        button = tk.Button(self.buttons_frame, text="\u221ax", bg=OFF_WHITE, fg=LABEL_COLOR, font=DEFAULT_FONT_STYLE,
+        button = tk.Button(self.buttons_frame, text="\u221ax", bg=BUTTON_COLOR_OPERATIONS, fg=LABEL_COLOR, font=DEFAULT_FONT_STYLE,
                            borderwidth=0, command=self.sqrt)
         button.grid(row=1, column=3, sticky=tk.NSEW)
 
@@ -152,7 +152,7 @@ class Calculator:
         self.update_label()
 
     def create_percentage_button(self):
-        button = tk.Button(self.buttons_frame, text="%", bg=OFF_WHITE, fg=LABEL_COLOR, font=DEFAULT_FONT_STYLE,
+        button = tk.Button(self.buttons_frame, text="%", bg=BUTTON_COLOR_OPERATIONS, fg=LABEL_COLOR, font=DEFAULT_FONT_STYLE,
                            borderwidth=0, command=self.percentage)
         button.grid(row=0, column=1, sticky=tk.NSEW)
 
@@ -179,7 +179,7 @@ class Calculator:
         button.grid(row=5, column=4, sticky=tk.NSEW)
 
     def create_backspace_button(self):
-        button = tk.Button(self.buttons_frame, text="⌫", bg=BUTTON_COLOR, fg=LABEL_COLOR, font=DEFAULT_FONT_STYLE,
+        button = tk.Button(self.buttons_frame, text="⌫", bg=BUTTON_COLOR_OPERATIONS, fg=LABEL_COLOR, font=DEFAULT_FONT_STYLE,
                            borderwidth=0, command=self.delete)
         button.grid(row=0, column=4, sticky=tk.NSEW)
 
