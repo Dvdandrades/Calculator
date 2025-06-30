@@ -63,6 +63,7 @@ class Calculator:
 
     def bind_keys(self):
         self.window.bind("<Return>", lambda event: self.evaluate())
+        self.window.bind("<BackSpace>", lambda event: self.delete())
         for key in self.digits:
             self.window.bind(str(key), lambda event, digit=key: self.add_to_expression(digit))
 
@@ -183,6 +184,16 @@ class Calculator:
 
     def evaluate(self):
         self.total_expression += self.current_expression
+        if not self.total_expression:
+            return
+        
+        if self.total_expression[-1] in self.operations.keys():
+            self.current_expression = "Error"
+            self.update_label()
+            self.total_expression = ""
+            self.update_total_label()
+            return
+        
         self.update_total_label()
         try:
             self.current_expression = str(eval(self.total_expression))
