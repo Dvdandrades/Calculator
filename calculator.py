@@ -107,6 +107,13 @@ class Calculator:
             button.grid(row=grid_value[0], column=grid_value[1], sticky=tk.NSEW)
 
     def append_operator(self, operator):
+        if not self.current_expression and not self.total_expression:
+            if operator in "*/":
+                return
+        if self.current_expression == "" and self.total_expression:
+            if self.total_expression[-1] in self.operations.keys():
+                return
+
         self.current_expression += operator
         self.total_expression += self.current_expression
         self.current_expression = ""
