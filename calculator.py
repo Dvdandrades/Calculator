@@ -1,8 +1,5 @@
 import tkinter as tk
 
-
-WINDOW_RESOLUTION = "375x667"
-
 SMALL_FONT_STYLE = ("Arial", 16)
 LARGE_FONT_STYLE = ("Arial", 40, "bold")
 DIGITS_FONT_STYLE = ("Arial", 24, "bold")
@@ -21,7 +18,9 @@ EQUAL_BUTTON_FG_COLOR = "#FFFFFF"
 class Calculator:
     def __init__(self):
         self.window = tk.Tk()
-        self.window.geometry(WINDOW_RESOLUTION)
+        screen_width = self.window.winfo_screenmmwidth()
+        screen_height = self.window.winfo_screenheight()
+        self.window.geometry(f"{int(screen_width * 0.75)}x{int(screen_height * 0.6)}")
         self.window.resizable(0, 0)
         self.window.title("Calculator")
 
