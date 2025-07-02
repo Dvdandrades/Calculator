@@ -1,4 +1,5 @@
 import tkinter as tk
+import math
 
 SMALL_FONT_STYLE = ("Arial", 16)
 LARGE_FONT_STYLE = ("Arial", 40, "bold")
@@ -172,13 +173,15 @@ class Calculator:
         self.change_on_hover(button, "#e6e6e6", BUTTON_COLOR_OPERATIONS)
 
     def sqrt(self):
-        if self.current_expression:
-            try:
-                self.current_expression = str(eval(f"{self.current_expression}**0.5"))
-                self.update_label()
-            except:
-                self.current_expression = "Error"
-                self.update_label()
+        try:
+            value = float(self.current_expression)
+            if value < 0:
+                raise ValueError("Negative square root")
+            self.current_expression = str(math.sqrt(value))
+        except:
+            self.current_expression = "Error"
+        finally:
+            self.update_label()
 
     def create_sqrt_button(self):
         button = tk.Button(self.buttons_frame, text="\u221ax", bg=BUTTON_COLOR_OPERATIONS, fg=LABEL_COLOR, font=DEFAULT_FONT_STYLE,
