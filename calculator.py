@@ -99,10 +99,15 @@ class Calculator:
         return frame
     
     def add_to_expression(self, value):
+        if self.current_expression in ["Error", "Can't divide by zero"]:
+            self.current_expression = ""
+
         if value == ".":
-            if self.current_expression and "." in self.current_expression.split()[-1]:
+            parts = self.current_expression.split()
+            if parts and "." in parts[-1]:
                 return
-        self.current_expression += str(value)
+            
+        self.current_expression += str(value)    
         self.update_label()
 
     def create_digit_buttons(self):
@@ -113,9 +118,13 @@ class Calculator:
             self.change_on_hover(button, "#e6e6e6", BUTTON_COLOR_DIGITS)
 
     def append_operator(self, operator):
+        if self.current_expression in ["Error", "Can't divide by zero"]:
+            self.current_expression = ""
+
         if not self.current_expression and not self.total_expression:
             if operator in "*/":
                 return
+            
         if self.current_expression == "" and self.total_expression:
             if self.total_expression[-1] in self.operations.keys():
                 return
@@ -193,28 +202,29 @@ class Calculator:
         self.change_on_hover(button, "#e6e6e6", BUTTON_COLOR_OPERATIONS)
 
     def evaluate(self):
-        self.total_expression += self.current_expression
-        if not self.total_expression:
+        expression = self.total_expression + self.current_expression
+        if not expression:
             return
-        
-        if self.total_expression[-1] in self.operations.keys():
+
+        if expression[-1] in self.operations.keys():
             self.current_expression = "Error"
-            self.update_label()
             self.total_expression = ""
+            self.update_label()
             self.update_total_label()
             return
-        
-        self.update_total_label()
+
         try:
-            self.current_expression = str(eval(self.total_expression))
+            result = str(eval(expression))
+            self.current_expression = result
             self.total_expression = ""
         except ZeroDivisionError:
             self.current_expression = "Can't divide by zero"
-        except Exception as e:
+        except Exception:
             self.current_expression = "Error"
         finally:
             self.update_label()
-    
+            self.update_total_label()
+
     def delete(self):
         self.current_expression = self.current_expression[:-1]
         self.update_label()
