@@ -97,6 +97,7 @@ class Calculator:
         self.create_percentage_button()
         self.create_backspace_button()
         self.create_reciprocal_button()
+        self.create_negate_button()
 
     def create_display_labels(self):
         # Creates the labels to display expressions and results
@@ -255,6 +256,28 @@ class Calculator:
         button = tk.Button(self.buttons_frame, text="1/x", bg=BUTTON_COLOR_OPERATIONS, fg=LABEL_COLOR, font=DEFAULT_FONT_STYLE,
                            borderwidth=0, command=self.reciprocal)
         button.grid(row=1, column=1, sticky=tk.NSEW)
+        self.change_on_hover(button, "#e6e6e6", BUTTON_COLOR_OPERATIONS)
+
+    def negate(self):
+        # Negate of the current value
+        try:
+            if self.current_expression:
+                value = float(self.current_expression)
+                value *= -1
+                if value.is_integer():
+                    self.current_expression = str(int(value))
+                else:
+                    self.current_expression = str(value)
+                self.update_label()
+        except:
+            self.current_expression = "Error"
+            self.update_label()
+
+    def create_negate_button(self):
+        # Negate button
+        button = tk.Button(self.buttons_frame, text="+/-", bg=BUTTON_COLOR_OPERATIONS, fg=LABEL_COLOR, font=DEFAULT_FONT_STYLE,
+                           borderwidth=0, command=self.negate)
+        button.grid(row=5, column=1, sticky=tk.NSEW)
         self.change_on_hover(button, "#e6e6e6", BUTTON_COLOR_OPERATIONS)
 
     def evaluate(self):
