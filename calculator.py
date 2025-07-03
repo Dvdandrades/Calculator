@@ -180,7 +180,7 @@ class Calculator:
         # Clear button
         button = tk.Button(self.buttons_frame, text="C", bg=BUTTON_COLOR_OPERATIONS, fg=LABEL_COLOR, font=DEFAULT_FONT_STYLE,
                            borderwidth=0, command=self.clear)
-        button.grid(row=0, column=3, sticky=tk.NSEW)
+        button.grid(row=0, column=2, sticky=tk.NSEW)
         self.change_on_hover(button, "#e6e6e6", BUTTON_COLOR_OPERATIONS)
 
     def square(self):
@@ -298,7 +298,7 @@ class Calculator:
         # Backspace button
         button = tk.Button(self.buttons_frame, text="⌫", bg=BUTTON_COLOR_OPERATIONS, fg=LABEL_COLOR, font=DEFAULT_FONT_STYLE,
                            borderwidth=0, command=self.delete)
-        button.grid(row=0, column=4, sticky=tk.NSEW)
+        button.grid(row=0, column=3, columnspan=2,  sticky=tk.NSEW)
         self.change_on_hover(button, "#e6e6e6", BUTTON_COLOR_OPERATIONS)
 
     def create_buttons_frame(self):
